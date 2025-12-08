@@ -1,0 +1,43 @@
+1. Why is MVVM important? Which files represent Model, which files represent View, and which files represent ViewModel?
+
+MVVM (Model-View-ViewModel) is important because it allows you to separate the UI and business logic. This makes it easier to add new features, test existing code, and update the UI or business logic without affecting other components . It is especially useful for large applications with a lot of data and views.
+
+Based on this project:
+a. Model: Represents the data layer.
+Files: Movie.kt (Entity), MovieDao.kt, MovieDatabase.kt, and MovieRepository.kt.
+
+b. View: The UI that displays the data.
+Files: MainActivity.kt, activity_main.xml, RecyclerViewBinding.kt, and MovieAdapter.
+
+c. ViewModel: Fetches data from Model and provides it to View.
+Files: MovieViewModel.kt.
+
+
+2. In Part 1, you implemented Data Binding, why is this more efficient than using the normal method?
+
+Data Binding is more efficient because it allows the View Model to directly communicate with Views without the need for findViewById. By using a <layout> tag and <data> variables in XML, we can bind values (like viewModel.popularMovies) directly to UI components (like RecyclerView). This reduces boilerplate code in the Activity, such as removing the need to manually observe LiveData/StateFlow using lifecycleScope.launch inside the UI controller.
+
+
+
+3. In Part 2, you implemented the Singleton Pattern, why is this important?
+
+The Singleton Pattern is important for the Database Declaration because it ensures that there is only one single instance of the Database throughout multiple threads . This ensures data validity and prevents Race Conditions. This is crucial because creating a new instance of a Database is expensive.
+
+
+
+
+4. In Part 2 & 3, you implemented the Repository Pattern, why is this important?
+
+The Repository Pattern is important because it provides a way to synchronize application data between the web service (API) and the local database (Room). It ensures that the data in the local database is always up to date with the web service. Furthermore, this pattern enables users to access the app and view data even when there is no internet connection (offline mode) by serving cached data from the local database.
+
+
+
+5. In part 3, you implemented the Worker Manager, is there another way to refresh your database with the latest data other than using Worker?
+
+Yes, there are other ways, although WorkManager is the recommended solution for background tasks.
+
+- Fetch on App Start: You can fetch data in the onCreate method of the Activity or the init block of the ViewModel every time the user opens the app. However, this requires the user to open the app to trigger the update.
+
+- Manual Refresh: You can implement a "Swipe to Refresh" feature that allows the user to manually trigger a data fetch.
+
+- AlarmManager: For background scheduling similar to WorkManager, you could use AlarmManager (an older Android API), but WorkManager is generally preferred as it handles constraints (like network availability) and battery optimizations better.
