@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.test_lab_week_12"
+    namespace = "com.example.lab_week_13"
     compileSdk = 36
 
     defaultConfig {
@@ -17,6 +17,11 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    buildFeatures{
+        dataBinding = true
+    }
+
 
     buildTypes {
         release {
